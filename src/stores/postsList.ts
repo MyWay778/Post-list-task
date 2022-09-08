@@ -1,3 +1,4 @@
+import addSearchToUrl from '@/helpers/addSearchToUrl';
 import { defineStore } from 'pinia';
 
 type Post = {
@@ -64,17 +65,19 @@ export const usePostsListStore = defineStore('posts', {
       const posts = (await response.json()) as Post[];
       this.posts = posts;
 
-      posts.forEach(post => {
-        this.fetchUser(post.userId);
-      });
+      const userIds = posts.map(post => post.userId);
+      this.fetchUsersByIds(userIds);
     },
 
-    async fetchUser(id: number) {
-      const response = await fetch(
-        `http://jsonplaceholder.typicode.com/users/${id}`
+    async fetchUsersByIds(ids: number[]) {
+      const search = ids.map(id => ['id', id]);
+      const url = addSearchToUrl(
+        'http://jsonplaceholder.typicode.com/users',
+        search as [string, number][]
       );
-      const user = (await response.json()) as User;
-      this.users.push(user);
+      const response = await fetch(url);
+      const users = (await response.json()) as User[];
+      this.users = users;
     },
 
     setFilter({

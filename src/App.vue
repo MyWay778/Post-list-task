@@ -18,7 +18,7 @@ const searchInputHandler = (event: Event) => {
 
 <template>
   <header class="container d-flex justify-content-center p-5">
-    <div class="search-input input-group w-25">
+    <div class="search-input input-group">
       <label
         class="search-input__label border rounded-start p-2"
         for="search-input__input"
@@ -36,7 +36,7 @@ const searchInputHandler = (event: Event) => {
   </header>
 
   <main class="container">
-    <ul class="post-list">
+    <ul class="post-list p-0">
       <li
         class="post-list-card card"
         v-for="post in postsList.getPosts"
@@ -85,6 +85,14 @@ const searchInputHandler = (event: Event) => {
 
 .post-list {
   column-count: 3;
+
+  @include media-breakpoint-down(lg) {
+    column-count: 2;
+  }
+
+  @include media-breakpoint-down(md) {
+    column-count: 1;
+  }
 }
 
 .post-list-card {
