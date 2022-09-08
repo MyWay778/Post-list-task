@@ -1,7 +1,7 @@
 import addSearchToUrl from '@/helpers/addSearchToUrl';
 import { defineStore } from 'pinia';
 
-type Post = {
+export type Post = {
   id: number;
   title: string;
   body: string;

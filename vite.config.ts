@@ -13,5 +13,12 @@ export default defineConfig({
       '~bootstrap': path.resolve(__dirname, 'node_modules/bootstrap'),
       '~icons': path.resolve(__dirname, 'node_modules/bootstrap-icons/icons')
     }
+  },
+  css: {
+    preprocessorOptions: {
+      scss: {
+        additionalData: `@import "~bootstrap/scss/bootstrap";`
+      }
+    }
   }
 });
